@@ -1,0 +1,17 @@
+# Maven / Quarkus
+target/
+!.mvn/wrapper/maven-wrapper.jar
+.quarkus/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.classpath
+.project
+.settings/
+.factorypath
+
+# OS
+Thumbs.db
+.DS_Store
