@@ -44,6 +44,20 @@ class CatalogoResourceTest {
     }
 
     @Test
+    void scontoSulProdotto() {
+        given().when().get("/prodotti/1/sconto?percentuale=10")
+                .then().statusCode(200)
+                .body("percentuale", equalTo(10))
+                .body("prezzoScontato", equalTo(80.91f));
+    }
+
+    @Test
+    void scontoNonValido() {
+        given().when().get("/prodotti/1/sconto?percentuale=95")
+                .then().statusCode(400);
+    }
+
+    @Test
     void health() {
         given().when().get("/q/health")
                 .then().statusCode(200)

@@ -2,6 +2,7 @@ package com.example.catalogo;
 
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.DefaultValue;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
@@ -46,6 +47,20 @@ public class CatalogoResource {
         }
         Prodotto salvato = service.aggiungi(prodotto);
         return Response.created(URI.create("/prodotti/" + salvato.id())).entity(salvato).build();
+    }
+
+    @GET
+    @Path("/{id}/sconto")
+    public Response sconto(@PathParam("id") Long id,
+                           @QueryParam("percentuale") @DefaultValue("10") int percentuale) {
+        if (percentuale < 0 || percentuale > 90) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(new Errore("percentuale deve essere tra 0 e 90"))
+                    .build();
+        }
+        return service.perId(id)
+                .map(p -> Response.ok(Sconto.applica(p, percentuale)).build())
+                .orElse(Response.status(Response.Status.NOT_FOUND).build());
     }
 
     public record Errore(String messaggio) {
