@@ -1,6 +1,6 @@
 # micro-1-java · catalogo-service
 
-Microservizio **Quarkus** (Java 21) che espone il catalogo prodotti. Dati in memoria, nessun database. TEST
+Microservizio **Quarkus** (Java 21) che espone il catalogo prodotti. Dati in memoria, nessun database. 
 
 | | |
 |---|---|
